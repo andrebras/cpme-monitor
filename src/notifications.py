@@ -112,7 +112,7 @@ def send_all_notifications(message: str) -> None:
         logging.error(f"Pushover notification failed: {e}")
     
     try:
-        send_email("New Habitacional Listing", message)
+        send_email("🆕 New CPME Listing", message)
     except Exception as e:
         logging.error(f"Email notification failed: {e}")
     
