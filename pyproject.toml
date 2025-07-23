@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cpme-monitor"
+version = "1.0.0"
+description = "A simple monitor for CPME apartment listings"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Andre Bras", email = "andrebras@gmail.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop", 
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9", 
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "certifi>=2025.7.14",
+    "charset-normalizer>=3.4.2",
+    "greenlet>=3.2.3",
+    "idna>=3.10",
+    "playwright>=1.54.0",
+    "pyee>=13.0.0",
+    "python-dotenv>=1.1.1",
+    "requests>=2.32.4",
+    "twilio>=9.6.5",
+    "typing_extensions>=4.14.1",
+    "urllib3>=2.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/andrebras/cpme-monitor"
+Repository = "https://github.com/andrebras/cpme-monitor.git"
+Issues = "https://github.com/andrebras/cpme-monitor/issues"
+
+[project.scripts]
+cpme-monitor = "src.monitor:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]

@@ -11,6 +11,29 @@ A simple monitor that tracks apartment listings on the CPME website and sends no
 - **Graceful shutdown** handling
 - **Health check endpoint** for monitoring
 
+## Project Structure
+
+```
+cpme-monitor/
+├── src/                    # Main application code
+│   ├── monitor.py         # Main monitoring logic
+│   ├── scraper.py         # Web scraping functionality
+│   ├── notifications.py   # All notification systems
+│   ├── health.py          # Health check server
+│   └── config.py          # Configuration management
+├── tests/                 # Test scripts
+│   ├── test_notifications.py
+│   ├── test_monitor.py
+│   ├── test_health.py
+│   └── test_run.py
+├── deploy/                # Deployment configuration
+│   ├── Dockerfile
+│   ├── fly.toml
+│   └── .dockerignore
+├── main.py               # Entry point
+└── requirements.txt      # Dependencies
+```
+
 ## Local Development
 
 1. **Clone and setup:**
@@ -31,7 +54,7 @@ A simple monitor that tracks apartment listings on the CPME website and sends no
 
 3. **Run locally:**
    ```bash
-   python monitor.py
+   python main.py
    ```
 
 ## Deploy to Fly.io

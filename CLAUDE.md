@@ -28,14 +28,24 @@ This is a Python monitoring script that tracks available apartment listings on t
 ## Running the Application
 
 ```bash
-python monitor.py
+python main.py
 ```
 
-The script runs continuously, polling every 30 seconds and maintaining state in `last_count.txt`.
+The script runs continuously, polling every 30 seconds (configurable) and maintaining state in `last_count.txt`.
+
+## Project Structure
+
+- `src/monitor.py` - Main monitoring loop and application entry point
+- `src/scraper.py` - Web scraping functionality using Playwright
+- `src/notifications.py` - All notification systems (Pushover, Email, SMS, WhatsApp)
+- `src/health.py` - Health check server for monitoring
+- `src/config.py` - Centralized configuration management
+- `tests/` - Test scripts for all components
+- `deploy/` - Docker and fly.io deployment configuration
 
 ## Architecture
 
-- **Single-file application**: All functionality is contained in `monitor.py`
+- **Modular design**: Separated into logical modules for maintainability
 - **Web scraping**: Uses Playwright to scrape apartment count from the CPME website
 - **Multi-channel notifications**: Supports Pushover, email, SMS, and WhatsApp notifications
 - **State persistence**: Tracks last known count in `last_count.txt` to detect changes

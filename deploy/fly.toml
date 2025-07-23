@@ -22,7 +22,7 @@ primary_region = "mad"  # Madrid region (closest to Portugal)
   timeout = "10s"
 
 [processes]
-  app = "python monitor.py"
+  app = "python main.py"
 
 [[mounts]]
   source = "cpme_data"

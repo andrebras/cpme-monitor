@@ -2,10 +2,16 @@
 """Test script for the health check server"""
 
 import requests
+import sys
+import os
 import threading
 import time
 import logging
-from health import start_health_server
+
+# Add parent directory to path so we can import from src
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.health import start_health_server
 
 def test_health_server():
     """Test the health check endpoint"""
