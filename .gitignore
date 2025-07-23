@@ -1,0 +1,22 @@
+# Environment variables (contains sensitive credentials)
+.env
+
+# Virtual environment
+venv/
+
+# State files
+last_count.txt
+test_last_count.txt
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
