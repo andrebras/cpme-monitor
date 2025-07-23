@@ -69,10 +69,10 @@ def main() -> NoReturn:
             if current != last:
                 if current > last:
                     diff = current - last
-                    message = f"{diff} new listing(s) detected! Now: {current}"
+                    message = f"Listings updated! Count: {current} (+{diff}). New opportunities may be available. Check https://cpme.fyidigital.pt/arrendamento"
                 else:
                     diff = last - current
-                    message = f"Listing count changed: -{diff} (now {current}). Check for new listings!"
+                    message = f"Listings updated! Count: {current} (-{diff}). New opportunities may be available (listings can be edited/replaced). Check https://cpme.fyidigital.pt/arrendamento"
                 
                 # Send all notifications for any change
                 send_all_notifications(message)
