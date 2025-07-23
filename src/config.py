@@ -18,7 +18,7 @@ LAST_COUNT_FILE = Path(os.getenv("LAST_COUNT_FILE", "last_count.txt"))
 HEARTBEAT_FILE = Path(os.getenv("HEARTBEAT_FILE", "heartbeat.txt"))
 
 # Monitor settings
-POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", "30"))
+POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", "60"))
 ENABLE_HEALTH_SERVER = os.getenv("ENABLE_HEALTH_SERVER", "true").lower() == "true"
 HEALTH_PORT = int(os.getenv("HEALTH_PORT", "8080"))
 CPME_URL = os.getenv("CPME_URL", "https://cpme.fyidigital.pt/arrendamento")

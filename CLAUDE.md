@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Python monitoring script that tracks available listings on the CPME website (https://cpme.fyidigital.pt/arrendamento) and sends notifications when new listings become available.
+This is a Python monitoring script that tracks available listings on the CPME website and sends notifications when new listings become available.
 
 ## Development Setup
 
