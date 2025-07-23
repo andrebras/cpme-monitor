@@ -105,11 +105,12 @@ cpme-notifier/
 Environment variables:
 
 **Monitor Settings:**
-- `POLL_INTERVAL` - Seconds between checks (default: 30)
+- `POLL_INTERVAL` - Seconds between checks (default: 60)
 - `ENABLE_HEALTH_SERVER` - Enable health endpoint (default: true)
 - `HEALTH_PORT` - Health server port (default: 8080)
-- `INITIAL_COUNT` - Force initial count value (optional, default: 0)
+- `CPME_URL` - Website URL to monitor (default: configured)
 - `LAST_COUNT_FILE` - State file location (default: last_count.txt)
+- `HEARTBEAT_FILE` - Health check heartbeat file (default: heartbeat.txt)
 
 **Pushover (iPhone notifications):**
 - `PUSHOVER_USER_KEY` - Your Pushover user key
