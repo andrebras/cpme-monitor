@@ -1,0 +1,23 @@
+# fly.toml app configuration file generated for cpme-notifier on 2025-07-23T20:40:11+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'cpme-notifier'
+primary_region = 'lhr'
+
+[build]
+  dockerfile = 'deploy/Dockerfile'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

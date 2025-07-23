@@ -1,0 +1,28 @@
+# flyctl launch added from .gitignore
+# Environment variables (contains sensitive credentials)
+**/.env
+
+# Virtual environment
+**/venv
+
+# State files
+**/last_count.txt
+**/test_last_count.txt
+
+# Python cache
+**/__pycache__
+**/*.pyc
+**/*.pyo
+
+# IDE files
+**/.vscode
+**/.idea
+
+# OS files
+**/.DS_Store
+**/Thumbs.db
+
+# flyctl launch added from venv/.gitignore
+# Created by venv; see https://docs.python.org/3/library/venv.html
+venv/**/*
+fly.toml
