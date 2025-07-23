@@ -66,9 +66,13 @@ class HealthHandler(BaseHTTPRequestHandler):
 
 def start_health_server():
     """Start health check server in background thread"""
-    server = HTTPServer(("0.0.0.0", HEALTH_PORT), HealthHandler)
-    logging.info(f"Health server starting on port {HEALTH_PORT}")
-    server.serve_forever()
+    try:
+        server = HTTPServer(("0.0.0.0", HEALTH_PORT), HealthHandler)
+        logging.info(f"Health server starting on port {HEALTH_PORT}")
+        server.serve_forever()
+    except Exception as e:
+        logging.error(f"Health server failed to start: {e}")
+        raise
 
 if __name__ == "__main__":
     # Can be run standalone for testing

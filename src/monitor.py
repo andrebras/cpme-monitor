@@ -40,9 +40,13 @@ def main() -> NoReturn:
             from .health import start_health_server
             health_thread = threading.Thread(target=start_health_server, daemon=True)
             health_thread.start()
-            logging.info("Health check server started")
+            logging.info("Health check server thread started")
+            # Give it a moment to start and log any immediate errors
+            time.sleep(1)
         except ImportError:
             logging.warning("Health server not available")
+        except Exception as e:
+            logging.error(f"Failed to start health server: {e}")
     
     # Load or initialize last count  
     if LAST_COUNT_FILE.exists():
