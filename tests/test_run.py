@@ -36,11 +36,11 @@ def test_run(iterations=3):
     for i in range(iterations):
         try:
             current = fetch_habitacional_count()
-            logging.info(f"[{i+1}/{iterations}] Fetched habitacional={current} (last={last})")
+            logging.info(f"[{i+1}/{iterations}] Fetched count={current} (last={last})")
             
             if current > last:
                 diff = current - last
-                msg = f"{diff} new habitacional listing(s) available! Now: {current}"
+                msg = f"{diff} new listing(s) available! Now: {current}"
                 logging.info(f"🎉 New listings detected! Would send notifications...")
                 
                 # Test notification functions (they'll skip if not configured)

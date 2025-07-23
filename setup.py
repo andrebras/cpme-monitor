@@ -12,7 +12,7 @@ setup(
     name="cpme-monitor",
     version="1.0.0",
     author="Andre Bras",
-    description="A simple monitor for CPME apartment listings",
+    description="A simple monitor for CPME listings",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/andrebras/cpme-monitor",

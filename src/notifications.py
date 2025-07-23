@@ -31,7 +31,7 @@ def send_push(message: str) -> None:
             "token": PUSHOVER_API_TOKEN,
             "user": PUSHOVER_USER_KEY,
             "message": message,
-            "title": "🆕 New Habitacional Listing"
+            "title": "🆕 New CPME Listing"
         },
     )
     resp.raise_for_status()

@@ -1,10 +1,10 @@
-# CPME Apartment Monitor
+# CPME Monitor
 
-A simple monitor that tracks apartment listings on the CPME website and sends notifications when new listings appear.
+A simple monitor that tracks listings on the CPME website and sends notifications when new listings appear.
 
 ## Features
 
-- **Web scraping** of CPME apartment listings
+- **Web scraping** of CPME listings
 - **Multi-channel notifications**: Pushover (iPhone), Email, SMS, WhatsApp
 - **Multiple recipients** per notification type
 - **Persistent state** to track changes

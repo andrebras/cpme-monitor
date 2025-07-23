@@ -40,7 +40,7 @@ def test_email():
         recipients = os.getenv("EMAIL_RECIPIENTS").split(",")
         print(f"📧 Testing email to {len(recipients)} recipient(s): {', '.join(r.strip() for r in recipients)}")
         
-        send_email("Test CPME Monitor", "This is a test email from your CPME apartment monitor.")
+        send_email("Test CPME Monitor", "This is a test email from your CPME monitor.")
         print("✅ Email: Test sent successfully")
         return True
     except Exception as e:

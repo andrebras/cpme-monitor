@@ -1,7 +1,7 @@
 """
-CPME Apartment Monitor - Main Application.
+CPME Monitor - Main Application.
 
-Monitors CPME website for new apartment listings and sends notifications.
+Monitors CPME website for new listings and sends notifications.
 """
 
 import logging
@@ -56,11 +56,11 @@ def main() -> NoReturn:
     while not shutdown_requested:
         try:
             current = fetch_habitacional_count()
-            logging.info(f"Fetched habitacional={current} (last={last})")
+            logging.info(f"Fetched count={current} (last={last})")
             
             if current > last:
                 diff = current - last
-                message = f"{diff} new habitacional listing(s) available! Now: {current}"
+                message = f"{diff} new listing(s) available! Now: {current}"
                 
                 # Send all notifications
                 send_all_notifications(message)

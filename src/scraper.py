@@ -8,10 +8,10 @@ from playwright.sync_api import sync_playwright
 
 def fetch_habitacional_count() -> int:
     """
-    Scrape the CPME website to get current apartment count.
+    Scrape the CPME website to get current listing count.
     
     Returns:
-        int: Number of available apartments, 0 if none found or error.
+        int: Number of available listings, 0 if none found or error.
     """
     try:
         with sync_playwright() as pw:

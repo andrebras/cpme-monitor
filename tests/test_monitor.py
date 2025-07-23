@@ -23,7 +23,7 @@ def test_monitor_logic():
     try:
         # Get current count
         current = fetch_habitacional_count()
-        print(f"Current apartment count: {current}")
+        print(f"Current listing count: {current}")
         
         # Simulate first run (no previous count)
         if test_file.exists():
@@ -45,7 +45,7 @@ def test_monitor_logic():
         elif current < last:
             print(f"📉 Count decreased by {last - current}")
         else:
-            print("📊 No change in apartment count")
+            print("📊 No change in listing count")
         
         return True
         
@@ -67,7 +67,7 @@ if __name__ == "__main__":
     if success:
         print("✅ Monitor logic test passed!")
         print("\nTo run the full monitor:")
-        print("  python monitor.py")
+        print("  python main.py")
         print("\nNote: Configure your .env file for notifications to work.")
     else:
         print("❌ Monitor logic test failed!")

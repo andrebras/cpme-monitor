@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Python monitoring script that tracks available apartment listings on the CPME website (https://cpme.fyidigital.pt/arrendamento) and sends notifications when new listings become available.
+This is a Python monitoring script that tracks available listings on the CPME website (https://cpme.fyidigital.pt/arrendamento) and sends notifications when new listings become available.
 
 ## Development Setup
 
@@ -46,7 +46,7 @@ The script runs continuously, polling every 30 seconds (configurable) and mainta
 ## Architecture
 
 - **Modular design**: Separated into logical modules for maintainability
-- **Web scraping**: Uses Playwright to scrape apartment count from the CPME website
+- **Web scraping**: Uses Playwright to scrape listing count from the CPME website
 - **Multi-channel notifications**: Supports Pushover, email, SMS, and WhatsApp notifications
 - **State persistence**: Tracks last known count in `last_count.txt` to detect changes
 - **Error handling**: Continues running even if individual polling attempts fail

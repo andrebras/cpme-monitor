@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cpme-monitor"
 version = "1.0.0"
-description = "A simple monitor for CPME apartment listings"
+description = "A simple monitor for CPME listings"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
