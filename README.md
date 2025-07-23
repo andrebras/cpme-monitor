@@ -14,7 +14,7 @@ A simple monitor that tracks listings on the CPME website and sends notification
 ## Project Structure
 
 ```
-cpme-monitor/
+cpme-notifier/
 ├── src/                    # Main application code
 │   ├── monitor.py         # Main monitoring logic
 │   ├── scraper.py         # Web scraping functionality
@@ -27,11 +27,14 @@ cpme-monitor/
 │   ├── test_health.py
 │   └── test_run.py
 ├── deploy/                # Deployment configuration
-│   ├── Dockerfile
-│   ├── fly.toml
-│   └── .dockerignore
+│   └── Dockerfile
 ├── main.py               # Entry point
-└── requirements.txt      # Dependencies
+├── requirements.txt      # Dependencies
+├── pyproject.toml        # Python project configuration
+├── setup.py              # Package setup
+├── fly.toml              # Fly.io deployment config
+├── .dockerignore         # Docker ignore patterns
+└── CLAUDE.md             # Claude Code memory
 ```
 
 ## Local Development
@@ -77,7 +80,13 @@ cpme-monitor/
      PUSHOVER_API_TOKEN="your_token" \
      GMAIL_EMAIL="your_email@gmail.com" \
      GMAIL_PASSWORD="your_app_password" \
-     EMAIL_RECIPIENTS="email1@domain.com,email2@domain.com"
+     EMAIL_RECIPIENTS="email1@domain.com,email2@domain.com" \
+     TWILIO_ACCOUNT_SID="your_twilio_sid" \
+     TWILIO_AUTH_TOKEN="your_twilio_token" \
+     TWILIO_FROM_SMS="+1234567890" \
+     SMS_RECIPIENTS="+351123456789,+351987654321" \
+     TWILIO_FROM_WHATSAPP="+1234567890" \
+     WHATSAPP_RECIPIENTS="+351123456789,+351987654321"
    ```
 
 4. **Deploy:**
@@ -95,9 +104,29 @@ cpme-monitor/
 
 Environment variables:
 
+**Monitor Settings:**
 - `POLL_INTERVAL` - Seconds between checks (default: 30)
 - `ENABLE_HEALTH_SERVER` - Enable health endpoint (default: true)
 - `HEALTH_PORT` - Health server port (default: 8080)
+- `INITIAL_COUNT` - Force initial count value (optional, default: 0)
+- `LAST_COUNT_FILE` - State file location (default: last_count.txt)
+
+**Pushover (iPhone notifications):**
+- `PUSHOVER_USER_KEY` - Your Pushover user key
+- `PUSHOVER_API_TOKEN` - Your Pushover application token
+
+**Gmail (Email notifications):**
+- `GMAIL_EMAIL` - Your Gmail address
+- `GMAIL_PASSWORD` - Gmail App Password (not regular password!)
+- `EMAIL_RECIPIENTS` - Comma-separated email addresses
+
+**Twilio (SMS & WhatsApp):**
+- `TWILIO_ACCOUNT_SID` - Twilio account SID
+- `TWILIO_AUTH_TOKEN` - Twilio auth token
+- `TWILIO_FROM_SMS` - Twilio phone number for SMS
+- `SMS_RECIPIENTS` - Comma-separated phone numbers for SMS
+- `TWILIO_FROM_WHATSAPP` - Twilio WhatsApp number 
+- `WHATSAPP_RECIPIENTS` - Comma-separated phone numbers for WhatsApp
 
 ## Notifications
 
