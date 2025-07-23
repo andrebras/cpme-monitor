@@ -62,11 +62,15 @@ def main() -> NoReturn:
             current = fetch_habitacional_count()
             logging.info(f"Fetched count={current} (last={last})")
             
-            if current > last:
-                diff = current - last
-                message = f"{diff} new listing(s) available! Now: {current}"
+            if current != last:
+                if current > last:
+                    diff = current - last
+                    message = f"{diff} new listing(s) detected! Now: {current}"
+                else:
+                    diff = last - current
+                    message = f"Listing count changed: -{diff} (now {current}). Check for new listings!"
                 
-                # Send all notifications
+                # Send all notifications for any change
                 send_all_notifications(message)
                 
                 # Update last count

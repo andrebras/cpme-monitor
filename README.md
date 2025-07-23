@@ -1,6 +1,6 @@
 # CPME Monitor
 
-A simple monitor that tracks listings on the CPME website and sends notifications when new listings appear.
+A simple monitor that tracks listings on the CPME website and sends notifications when listing counts change.
 
 ## Features
 
