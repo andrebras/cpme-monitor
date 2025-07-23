@@ -1,0 +1,11 @@
+.env
+.git
+.gitignore
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+last_count.txt
+test_last_count.txt
+README.md

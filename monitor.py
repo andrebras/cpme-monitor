@@ -2,7 +2,10 @@ import json
 import logging
 import os
 import requests
+import signal
 import smtplib
+import sys
+import threading
 import time
 
 from dotenv import load_dotenv
@@ -26,10 +29,18 @@ SMS_RECIPIENTS = os.getenv("SMS_RECIPIENTS", "").split(",") if os.getenv("SMS_RE
 TW_FROM_WA   = os.getenv("TWILIO_FROM_WHATSAPP")
 WA_RECIPIENTS = os.getenv("WHATSAPP_RECIPIENTS", "").split(",") if os.getenv("WHATSAPP_RECIPIENTS") else []
 
-LAST_COUNT_FILE = Path("last_count.txt")
-POLL_INTERVAL   = 30  # seconds
+LAST_COUNT_FILE = Path(os.getenv("LAST_COUNT_FILE", "last_count.txt"))
+POLL_INTERVAL   = int(os.getenv("POLL_INTERVAL", "30"))  # seconds
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+
+# Global flag for graceful shutdown
+shutdown_requested = False
+
+def signal_handler(signum, frame):
+    global shutdown_requested
+    logging.info("Shutdown signal received. Finishing current check...")
+    shutdown_requested = True
 
 # ——— Helpers ———
 def fetch_habitacional_count():
@@ -137,6 +148,20 @@ def send_whatsapp(body):
 
 # ——— Main loop ———
 def main():
+    # Set up signal handlers for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+    
+    # Start health check server in background (for fly.io)
+    if os.getenv("ENABLE_HEALTH_SERVER", "true").lower() == "true":
+        try:
+            from health import start_health_server
+            health_thread = threading.Thread(target=start_health_server, daemon=True)
+            health_thread.start()
+            logging.info("Health check server started")
+        except ImportError:
+            logging.warning("Health server not available")
+    
     # load last count or initialize
     if LAST_COUNT_FILE.exists():
         last = int(LAST_COUNT_FILE.read_text().strip())
@@ -146,7 +171,7 @@ def main():
         logging.info(f"Initialized last_count = {last}")
 
     logging.info("Starting monitor loop...")
-    while True:
+    while not shutdown_requested:
         try:
             current = fetch_habitacional_count()
             logging.info(f"Fetched habitacional={current} (last={last})")
@@ -180,10 +205,15 @@ def main():
                 last = current
                 LAST_COUNT_FILE.write_text(str(last))
                 logging.info(f"Updated last count to {last}")
-            time.sleep(POLL_INTERVAL)
+            if not shutdown_requested:
+                time.sleep(POLL_INTERVAL)
         except Exception as e:
             logging.error(f"Error in main loop: {e}")
-            time.sleep(POLL_INTERVAL)
+            if not shutdown_requested:
+                time.sleep(POLL_INTERVAL)
+    
+    logging.info("Monitor stopped gracefully.")
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()
