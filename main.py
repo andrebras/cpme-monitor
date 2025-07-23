@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 CPME Monitor - Entry point
-Run the apartment monitor
+Run the CPME monitor
 """
 
 if __name__ == "__main__":
