@@ -4,17 +4,14 @@ Simple health check server for fly.io
 Runs alongside the monitor to provide health status
 """
 
+import json
 import logging
-import os
 import threading
 import time
 from datetime import datetime, timedelta
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from pathlib import Path
 
-# Health check configuration
-HEALTH_PORT = int(os.getenv("HEALTH_PORT", "8080"))
-LAST_COUNT_FILE = Path("last_count.txt")
+from .config import HEALTH_PORT, LAST_COUNT_FILE
 
 class HealthHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -54,14 +51,14 @@ class HealthHandler(BaseHTTPRequestHandler):
             self.send_response(code)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(str(response).encode())
+            self.wfile.write(json.dumps(response).encode())
             
         except Exception as e:
             self.send_response(503)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             error_response = {"status": "error", "message": str(e)}
-            self.wfile.write(str(error_response).encode())
+            self.wfile.write(json.dumps(error_response).encode())
 
     def log_message(self, format, *args):
         # Suppress HTTP logs to keep output clean
