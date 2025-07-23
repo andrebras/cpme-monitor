@@ -15,6 +15,7 @@ load_dotenv(override=True)
 
 # File paths
 LAST_COUNT_FILE = Path(os.getenv("LAST_COUNT_FILE", "last_count.txt"))
+HEARTBEAT_FILE = Path(os.getenv("HEARTBEAT_FILE", "heartbeat.txt"))
 
 # Monitor settings
 POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", "30"))

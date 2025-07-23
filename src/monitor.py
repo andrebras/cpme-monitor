@@ -12,7 +12,7 @@ import threading
 import time
 from typing import Any, NoReturn
 
-from .config import LAST_COUNT_FILE, POLL_INTERVAL, ENABLE_HEALTH_SERVER
+from .config import LAST_COUNT_FILE, HEARTBEAT_FILE, POLL_INTERVAL, ENABLE_HEALTH_SERVER
 from .scraper import fetch_habitacional_count
 from .notifications import send_all_notifications
 
@@ -65,6 +65,9 @@ def main() -> NoReturn:
         try:
             current = fetch_habitacional_count()
             logging.info(f"Fetched count={current} (last={last})")
+            
+            # Update heartbeat for health checks
+            HEARTBEAT_FILE.write_text(str(int(time.time())))
             
             if current != last:
                 if current > last:

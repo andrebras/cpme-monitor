@@ -11,7 +11,7 @@ import time
 from datetime import datetime, timedelta
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-from .config import HEALTH_PORT, LAST_COUNT_FILE
+from .config import HEALTH_PORT, LAST_COUNT_FILE, HEARTBEAT_FILE
 
 class HealthHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -23,20 +23,20 @@ class HealthHandler(BaseHTTPRequestHandler):
 
     def send_health_response(self):
         try:
-            # Check if monitor is running (last_count.txt updated recently)
-            if LAST_COUNT_FILE.exists():
-                last_modified = datetime.fromtimestamp(LAST_COUNT_FILE.stat().st_mtime)
-                age = datetime.now() - last_modified
+            # Check if monitor is running (heartbeat updated recently)
+            if HEARTBEAT_FILE.exists():
+                last_heartbeat = int(HEARTBEAT_FILE.read_text().strip())
+                age_seconds = int(time.time()) - last_heartbeat
                 
-                if age < timedelta(minutes=5):  # Consider healthy if updated in last 5 min
+                if age_seconds < 120:  # Consider healthy if heartbeat within last 2 minutes
                     status = "healthy"
                     code = 200
-                    last_count = LAST_COUNT_FILE.read_text().strip()
-                    message = f"Monitor running. Last count: {last_count}, updated {age.seconds}s ago"
+                    last_count = LAST_COUNT_FILE.read_text().strip() if LAST_COUNT_FILE.exists() else "unknown"
+                    message = f"Monitor running. Last count: {last_count}, heartbeat {age_seconds}s ago"
                 else:
                     status = "unhealthy"
                     code = 503
-                    message = f"Monitor not updated for {age.seconds}s"
+                    message = f"Monitor heartbeat stale: {age_seconds}s ago"
             else:
                 status = "starting"
                 code = 200
