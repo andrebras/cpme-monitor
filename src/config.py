@@ -21,6 +21,7 @@ HEARTBEAT_FILE = Path(os.getenv("HEARTBEAT_FILE", "heartbeat.txt"))
 POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", "30"))
 ENABLE_HEALTH_SERVER = os.getenv("ENABLE_HEALTH_SERVER", "true").lower() == "true"
 HEALTH_PORT = int(os.getenv("HEALTH_PORT", "8080"))
+CPME_URL = os.getenv("CPME_URL", "https://cpme.fyidigital.pt/arrendamento")
 
 # Pushover settings
 PUSHOVER_USER_KEY = os.getenv("PUSHOVER_USER_KEY")

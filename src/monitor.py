@@ -12,7 +12,7 @@ import threading
 import time
 from typing import Any, NoReturn
 
-from .config import LAST_COUNT_FILE, HEARTBEAT_FILE, POLL_INTERVAL, ENABLE_HEALTH_SERVER
+from .config import LAST_COUNT_FILE, HEARTBEAT_FILE, POLL_INTERVAL, ENABLE_HEALTH_SERVER, CPME_URL
 from .scraper import fetch_habitacional_count
 from .notifications import send_all_notifications
 
@@ -72,10 +72,10 @@ def main() -> NoReturn:
             if current != last:
                 if current > last:
                     diff = current - last
-                    message = f"Listings updated! Count: {current} (+{diff}). New opportunities may be available. Check https://cpme.fyidigital.pt/arrendamento"
+                    message = f"Listings updated! Count: {current} (+{diff}). New opportunities may be available. Check {CPME_URL}"
                 else:
                     diff = last - current
-                    message = f"Listings updated! Count: {current} (-{diff}). New opportunities may be available (listings can be edited/replaced). Check https://cpme.fyidigital.pt/arrendamento"
+                    message = f"Listings updated! Count: {current} (-{diff}). New opportunities may be available (listings can be edited/replaced). Check {CPME_URL}"
                 
                 # Send all notifications for any change
                 send_all_notifications(message)

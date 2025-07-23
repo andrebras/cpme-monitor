@@ -12,6 +12,7 @@ primary_region = 'cdg'
 [env]
   POLL_INTERVAL = "60"  # Check every minute in production
   ENABLE_HEALTH_SERVER = "true"
+  CPME_URL = "https://cpme.fyidigital.pt/arrendamento"
 
 [http_service]
   internal_port = 8080
