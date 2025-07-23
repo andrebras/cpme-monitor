@@ -5,6 +5,7 @@ Monitors CPME website for new listings and sends notifications.
 """
 
 import logging
+import os
 import signal
 import sys
 import threading
