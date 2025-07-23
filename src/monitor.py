@@ -43,13 +43,16 @@ def main() -> NoReturn:
         except ImportError:
             logging.warning("Health server not available")
     
-    # Load or initialize last count
+    # Load or initialize last count  
     if LAST_COUNT_FILE.exists():
         last = int(LAST_COUNT_FILE.read_text().strip())
+        logging.info(f"Loaded last_count = {last}")
     else:
-        last = fetch_habitacional_count()
+        # First run - use initial count (default 0, configurable)
+        initial_count = int(os.getenv("INITIAL_COUNT", "0"))
+        last = initial_count
         LAST_COUNT_FILE.write_text(str(last))
-        logging.info(f"Initialized last_count = {last}")
+        logging.info(f"First run - initialized last_count = {last}")
 
     logging.info(f"Starting monitor loop (checking every {POLL_INTERVAL}s)...")
     
