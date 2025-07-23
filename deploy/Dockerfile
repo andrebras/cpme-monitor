@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copy requirements and install Python dependencies
-COPY ../requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install Playwright and browser
@@ -18,7 +18,7 @@ RUN playwright install chromium
 RUN playwright install-deps chromium
 
 # Copy application code
-COPY .. .
+COPY . .
 
 # Create data directory for persistent state
 RUN mkdir -p /app/data
